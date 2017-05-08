@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <script src="https://aframe.io/releases/0.3.0/aframe.min.js"></script>
+  <script src="https://sdk.altvr.com/libs/altspace.js/2.4.1/altspace.min.js"></script>
+  <script>
+    // n-skeleton-parent only works with root meshes at the moment. Since most model loaders use a root
+    // container object, we need to collapse the model so that n-skeleton-parent can access the mesh directly.
+    AFRAME.registerComponent('collapse-model', {
+        init: function () {
+            this.el.addEventListener('model-loaded', function () {
+                this.el.object3DMap.mesh.updateMatrixWorld();
+                var mesh;
+                this.el.object3DMap.mesh.traverse(function (obj) {
+                    if (!mesh && obj instanceof THREE.Mesh) {
+                        mesh = obj;
+                    }
+                }.bind(this))
+                if (mesh) {
+                    mesh.scale.copy(mesh.getWorldScale());
+                    this.el.setObject3D('mesh', mesh);
+                    // setObject3D emits this event in a-frame 0.4.0
+                    this.el.emit('object3dset', {
+                        type: 'mesh'
+                    });
+                }
+            }.bind(this));
+        }
+    });
+  </script>
+  <script>
+    altspace.getThreeJSTrackingSkeleton().then(function (skeleton) {
+          window.head = skeleton.getJoint('Head');
+        });
+        AFRAME.registerComponent('altspace-look-at', {
+          init: function () {
+            if (!window.altspace || !altspace.inClient) { return; }
+          },
+          tick: function () {
+            if (!window.head || !this.el.object3D) { return; }
+            this.el.object3D.lookAt(window.head.position); 
+          }
+        })
+  </script>
+  <body>
+    <a-scene altspace=fullspace:true sync-system="author: bookgirl; app:paint clothes">
+      <a-assets>
+       
+        <a-asset-item id="mask" src="https://rawgit.com/Lia021/hunted-birthday/master/mask%203/untitled.dae"></a-asset-item>
+ 
+        <a-mixin id="mask" collada-model="#mask" collapse-model></a-mixin>
+
+        <a-mixin id="eye-mask" collada-model="#eye-mask-model" collapse-model></a-mixin>
+
+        <a-mixin id="parent-to-head" position="0 0.04 -0.09" scale="1.40 1.40 1.40" rotation="0 90 0" n-skeleton-parent="part:head;" sync sync-n-skeleton-parent></a-mixin>
+
+      </a-assets>
+      
+ 
+      <!--model 4-->
+
+      <a-entity position="-4.55 2.80 5.35" rotation="0 90 0" mixin="mask" instantiator="on: click;group: mask; mixin: mask parent-to-head"></a-entity>
+
+
+
+
+</body>
+</html>
