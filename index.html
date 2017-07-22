@@ -52,29 +52,43 @@
        
         <a-asset-item id="hat" src="https://rawgit.com/Lia021/paint-clothes/master/guest%20hat/guest%20hat.dae"></a-asset-item>
         <a-asset-item id="brush" src="https://rawgit.com/Lia021/paint-clothes/master/donut/fae%20donut.dae"></a-asset-item>
-       
+        <a-asset-item id="b-mic" src="https://rawgit.com/Lia021/hunted-birthday/master/b-mic/b-mic.dae"></a-asset-item>
+        
+        
 
         <a-mixin id="hat" collada-model="#hat" collapse-model></a-mixin>
  
+ <a-mixin id="brush" collada-model="#brush" collapse-model></a-mixin>
+
       <a-mixin id="parent-to-head"scale="1.13 1.23 1.23" position="0 0.03 0" rotation="-22 -180 0" n-skeleton-parent="part:head;" sync sync-n-skeleton-parent></a-mixin>
  
 
-     <a-mixin id="brush" collada-model="#brush" collapse-model></a-mixin>
- 
-      <a-mixin id="parent-to-right-hand" position="0 -0.09 -0.062"scale="1.10 1.10 1.10"rotation="0 90 0" n-skeleton-parent="part: hand; side: right;" sync sync-n-skeleton-parent></a-mixin>
- 
+      <a-mixin id="b-mic" collada-model="#b-mic" collapse-model></a-mixin>
+
+
+        <a-mixin id="parent-to-right-hand" position="-0.12 -0.02 -0.09" rotation="-90 90 0" n-skeleton-parent="part: hand; side: right;" sync sync-n-skeleton-parent></a-mixin>
+
+    <a-mixin id="brush" collada-model="#brush" collapse-model></a-mixin>
+
+        <a-mixin id="parent-to-left-hand" position="0 -0.09 -0.062"scale="1.10 1.10 1.10" rotation="0 -90 0" n-skeleton-parent="part: hand; side: left;" sync sync-n-skeleton-parent></a-mixin>
+
 
       </a-assets>
       
  
       <!--hat-->
       <a-entity position="0 2 0" scale="1.20 1.20 1.20"mixin="hat" instantiator="on: click;group: hat; mixin: hat parent-to-head"></a-entity>
- 
+
+
        <!--brush-->
 
-      <a-entity position="-2.54 1.35 -5.90" mixin="brush" rotation="90 0 0" instantiator="on: click;group: brush; mixin: brush parent-to-right-hand"></a-entity>
+      <a-entity position="-2.54 1.35 -5.90" mixin="b-mic" rotation="90 0 0" instantiator="on: click;group: b-mic; mixin: b-mic parent-to-right-hand"></a-entity>
 
- 
+
+   <!--model 1-->
+
+      <a-entity position="-2.54 1.65 -5.90" mixin="brush" rotation="90 0 0" instantiator="on: click;group: brush; mixin: brush parent-to-left-hand"></a-entity>
+     
 
 </body>
 </html>
