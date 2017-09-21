@@ -53,6 +53,8 @@
         <a-asset-item id="hat" src="https://rawgit.com/Lia021/paint-clothes/master/guest%20hat/guest%20hat.dae"></a-asset-item>
         <a-asset-item id="brush" src="https://rawgit.com/Lia021/paint-clothes/master/donut/fae%20donut.dae"></a-asset-item>
         <a-asset-item id="b-mic" src="https://rawgit.com/Lia021/hunted-birthday/master/b-mic/b-mic.dae"></a-asset-item>
+        <a-asset-item id="icecream" src="https://rawgit.com/Lia021/Kitchen/master/icecream/icecream.dae"></a-asset-item>
+        <a-asset-item id="chicken" src="https://rawgit.com/Lia021/Kitchen/master/chicken/chicken6.dae"></a-asset-item>
         
         
 
@@ -72,6 +74,12 @@
 
         <a-mixin id="parent-to-left-hand" position="0 -0.09 -0.062"scale="1.10 1.10 1.10" rotation="0 -90 0" n-skeleton-parent="part: hand; side: left;" sync sync-n-skeleton-parent></a-mixin>
 
+        <a-mixin id="icecream" collada-model="#icecream" collapse-model></a-mixin>
+        
+        <a-mixin id="chicken" collada-model="#chicken" collapse-model></a-mixin>
+        
+                <a-mixin id="parent-to-spine" scale="2.20 2.05 2.20"position="0 -0.73 0" rotation="0 90 0" n-skeleton-parent="part: spine; side: center;" sync sync-n-skeleton-parent></a-mixin>
+        
 
       </a-assets>
       
@@ -84,6 +92,14 @@
 
       <a-entity position="-2.54 1.35 -5.90" mixin="b-mic" rotation="90 0 0" instantiator="on: click;group: b-mic; mixin: b-mic parent-to-right-hand"></a-entity>
 
+        <!--icecream-->
+        <a-entity position="0 -0 0" mixin="icecream" scale="3 3 3" rotation="0 0 0" instantiator="on: click;group: icecream; mixin: icecream parent-to-spine"></a-entity>
+        
+         <!--chicken-->
+
+ <a-entity position="0 0 9" scale="1 1 1" mixin="chicken" rotation="0 0 0" instantiator="on: click;group: icecream; mixin: chicken parent-to-spine"></a-entity>
+ 
+ 
 
    <!--model 1-->
 
